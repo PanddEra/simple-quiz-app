@@ -1,0 +1,35 @@
+INSERT INTO `questions` (`question_text`, `correct_option`) VALUES
+('What is the capital of France?', 'option_c'),
+('Which planet is known as the Red Planet?', 'option_b'),
+('Who wrote "Romeo and Juliet"?', 'option_a'),
+('What is the chemical symbol for Gold?', 'option_d'),
+('Which ocean is the largest on Earth?', 'option_b'),
+('In what year did the Titanic sink?', 'option_a'),
+('What is the smallest prime number?', 'option_c'),
+('Which element has the atomic number 1?', 'option_b'),
+('Who painted the Mona Lisa?', 'option_a'),
+('Which country is known as the Land of the Rising Sun?', 'option_d'),
+('What is the hardest natural substance on Earth?', 'option_b'),
+('Which mammal is known to have the most powerful bite?', 'option_c'),
+('What is the currency of Japan?', 'option_a'),
+('How many continents are there on Earth?', 'option_d'),
+('Which gas do plants absorb from the atmosphere?', 'option_b');
+
+
+
+INSERT INTO `answers` (`question_id`, `option_a`, `option_b`, `option_c`, `option_d`) VALUES
+(1, 'Berlin', 'Madrid', 'Paris', 'Rome'),
+(2, 'Venus', 'Mars', 'Jupiter', 'Saturn'),
+(3, 'William Shakespeare', 'Mark Twain', 'Charles Dickens', 'Jane Austen'),
+(4, 'Ag', 'Fe', 'Gd', 'Au'),
+(5, 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Arctic Ocean'),
+(6, '1912', '1905', '1920', '1898'),
+(7, '0', '1', '2', '3'),
+(8, 'Helium', 'Hydrogen', 'Oxygen', 'Carbon'),
+(9, 'Leonardo da Vinci', 'Vincent van Gogh', 'Pablo Picasso', 'Claude Monet'),
+(10, 'China', 'South Korea', 'Thailand', 'Japan'),
+(11, 'Gold', 'Diamond', 'Iron', 'Quartz'),
+(12, 'Lion', 'Grizzly Bear', 'Hippopotamus', 'Crocodile'),
+(13, 'Yen', 'Won', 'Dollar', 'Euro'),
+(14, '5', '6', '8', '7'),
+(15, 'Oxygen', 'Carbon Dioxide', 'Nitrogen', 'Methane');

@@ -7,12 +7,12 @@ export default function initEvents({
     const loginForm = loginModal.body;
 
     window.addEventListener('DOMContentLoaded', (e) => {
-        if(requestHandler.isSetUsername()){
+        if(requestHandler.issetUsername()){
             loginModal.show();
         }
     })
 
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', () => {
         requestHandler.setUsername();
     })
 }

@@ -1,5 +1,6 @@
 'use strict';
-import requestHandler from "./requestHandler";
+import storageHandler from "./storageHandler";
+
 export default function initEvents({
     loginModal
                                    }){
@@ -7,12 +8,12 @@ export default function initEvents({
     const loginForm = loginModal.body;
 
     window.addEventListener('DOMContentLoaded', (e) => {
-        if(requestHandler.issetUsername()){
+        if(storageHandler.username && storageHandler.username.length === 0){
             loginModal.show();
         }
     })
 
-    loginForm.addEventListener('submit', () => {
-        requestHandler.setUsername();
+    loginForm.addEventListener('submit', (e) => {
+            storageHandler.username = e.target.value;
     })
 }

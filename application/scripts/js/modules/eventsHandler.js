@@ -2,12 +2,14 @@
 import storageHandler from "./storageHandler";
 
 export default function initEvents({
-    loginModal
+                                       loginModal,
+                                       sendAnswersModal
+
                                    }){
 
     const loginForm = loginModal.body;
 
-    window.addEventListener('DOMContentLoaded', (e) => {
+    window.addEventListener('DOMContentLoaded', () => {
         if(storageHandler.username && storageHandler.username.length === 0){
             loginModal.show();
         }

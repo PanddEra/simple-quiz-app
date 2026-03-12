@@ -1,6 +1,6 @@
 let instances = 1;
 
-const createModal = ({title, id, body, footer}) => {
+const createModal = ({id, title, body, footer}) => {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `<div class="modal fade" id=${id}_${instances}>
                             <div class="modal-dialog">

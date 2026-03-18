@@ -1,7 +1,28 @@
 const requestHandler = {
-    async fetchGetQuestions(url) {
+
+    async getQuestionCards(){
+        const questions = await this._fetchGetQuestions();
+        const answers = await this._fetchGetAnswers();
+        let data = []
+        for (let i = 0; i < questions.length; i++) {
+            data[i] = questions[i];
+            for (let j = 0; j < answers.length; j++) {
+                if(questions[i].question_id === answers[j].question_id){
+                    if (!data[i].options) data[i].options = [];
+                    data[i].options.push(answers[j]);
+                }
+            }
+        }
+        return data;
+    },
+    async _fetchGetQuestions(url='application/scripts/php/get_questions.php') {
        const response = await fetch(url);
-       //TODO request handler
+       return await response.json();
+    },
+
+    async _fetchGetAnswers(url='application/scripts/php/get_answers.php') {
+        const response = await fetch(url);
+        return response.json();
     }
 }
 export default requestHandler;

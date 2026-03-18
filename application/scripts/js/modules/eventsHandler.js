@@ -1,21 +1,29 @@
 'use strict';
-import storageHandler from "./storageHandler";
+import storageHandler from "./storageHandler.js";
+import questionCardService from "./questionCardService.js";
+import requestHandler from "./requestHandler.js";
 
 export default function initEvents({
                                        loginModal,
                                        sendAnswersModal
-
                                    }){
 
-    const loginForm = loginModal.body;
+    const loginForm = document.getElementById('loginForm');
 
-    window.addEventListener('DOMContentLoaded', () => {
-        if(storageHandler.username && storageHandler.username.length === 0){
+    window.addEventListener('DOMContentLoaded', async () => {
+        if (!storageHandler.username) {
             loginModal.show();
         }
+        const questionsData = await requestHandler.getQuestionCards();
+        const questionsElements = await questionCardService.generateQuestions(questionsData).join('');
+        document.body.insertAdjacentHTML('beforeend', questionsElements);//NOT MINE
     })
 
-    loginForm.addEventListener('submit', (e) => {
-            storageHandler.username = e.target.value;
-    })
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            storageHandler.username = e.target.elements.usernameInput.value;
+            loginModal.hide();
+        });
+    }
 }

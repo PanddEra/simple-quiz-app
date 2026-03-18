@@ -15,7 +15,7 @@ const loginModal = createModal({
     footer:
         `<div class="modal-footer d-flex justify-content-between">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Guest Mode</button>
-            <button form="add-contact-form" type="submit" class="btn btn-success">Login</button>
+            <button form="loginForm" type="submit" class="btn btn-success">Login</button>
         </div>`
 });
 

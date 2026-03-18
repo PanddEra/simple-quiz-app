@@ -3,10 +3,10 @@ global $conn;
 $query = "SELECT * FROM answers";
 
 $result = mysqli_query($conn, $query);
-$questions = [];
+$answers = [];
 
 while($row = mysqli_fetch_assoc($result)) {
-    $questions[] = $row;
+    $answers[] = $row;
 }
 
-echo json_encode($questions);
+echo json_encode($answers);

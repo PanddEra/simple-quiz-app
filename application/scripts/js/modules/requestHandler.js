@@ -15,6 +15,19 @@ const requestHandler = {
         }
         return data;
     },
+    async sendAnswers(data) {
+        const res = await fetch(`application/scripts/php/post_user_response.php`, {
+            method: "POST",
+            body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+            throw new Error("Failed to send answers");
+        }
+
+        return await res.json();
+    },
+
     async _fetchGetQuestions(url='application/scripts/php/get_questions.php') {
        const response = await fetch(url);
        return await response.json();

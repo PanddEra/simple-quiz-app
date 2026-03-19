@@ -2,6 +2,8 @@
 import storageHandler from "./storageHandler.js";
 import questionCardService from "./questionCardService.js";
 import requestHandler from "./requestHandler.js";
+import {renderQuiz} from "./renderQuiz.js";
+import {showResult} from "./resultView.js";
 
 export default function initEvents({
                                        loginModal,
@@ -11,44 +13,42 @@ export default function initEvents({
     const loginForm = document.getElementById('loginForm');
 
     window.addEventListener('DOMContentLoaded', async () => {
-        if (!storageHandler.username) {
-            loginModal.show();
+        const username = e.target.elements.usernameInput.value.trim();
+
+        if (!username) {
+            alert('Enter username');
+            return;
         }
+try{
+    const questionsData = await requestHandler.getQuestionCards();
+}catch (e){
+            alert("Failed to load questions")
+    console.log(e)
+}
 
-        const questionsData = await requestHandler.getQuestionCards();
         const questionsHTML = questionCardService.generateQuestions(questionsData).join('');
-//TODO move rendering to another file !
-        const quizFormHTML = ` 
-        <form id="quizForm">
-            ${questionsHTML}
-            <button type="submit" class="btn btn-success mt-4">Finish Quiz</button>
-        </form>
-    `;
+        renderQuiz(questionsHTML);
 
-        document.body.insertAdjacentHTML('beforeend', quizFormHTML);
-
-        document.getElementById('quizForm').addEventListener('submit', (e) => {
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const formData = new FormData(e.target);
-            const results = [];
+            const formData = new FormData(form);
 
-            for (let [key, value] of formData.entries()) {
-                const questionId = key.replace('question_', '');
-                results.push({
-                    question_id: questionId,
-                    selected_option: value
-                });
-            }
+            const results = Array.from(formData.entries()).map(([key, value]) => ({
+                question_id: key.replace('question_', ''),
+                selected_option: value
+            }));
 
-            console.log("Saving these results:", results);
+            await requestHandler.sendAnswers(results);
+
+            showResult(results);
         });
     });
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            storageHandler.username = e.target.elements.usernameInput.value;
+            storageHandler.username = e.target.elements.usernameInput.value.trim();
             loginModal.hide();
         });
     }

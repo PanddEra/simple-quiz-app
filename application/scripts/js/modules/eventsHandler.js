@@ -5,51 +5,55 @@ import requestHandler from "./requestHandler.js";
 import {renderQuiz} from "./renderQuiz.js";
 import {showResult} from "./resultView.js";
 
-export default function initEvents({
-                                       loginModal,
-                                       sendAnswersModal
-                                   }){
-
+export default function initEvents({ loginModal, sendAnswersModal }) {
     const loginForm = document.getElementById('loginForm');
 
-    window.addEventListener('DOMContentLoaded', async () => {
-        const username = e.target.elements.usernameInput.value.trim();
+    // Функція для запуску квізу
+    const startQuiz = async () => {
+        try {
+            const questionsData = await requestHandler.getQuestionCards();
+            const questionsHTML = questionCardService.generateQuestions(questionsData).join('');
 
-        if (!username) {
-            alert('Enter username');
-            return;
+            // Рендеримо квіз
+            renderQuiz(questionsHTML);
+
+            // Тепер, коли форма з'явилася в DOM, вішаємо на неї подію
+            const quizForm = document.getElementById('quizForm');
+            quizForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const formData = new FormData(quizForm);
+                const results = Array.from(formData.entries()).map(([key, value]) => ({
+                    question_id: key.replace('question_', ''),
+                    selected_option: value
+                }));
+
+                await requestHandler.sendAnswers(results);
+                showResult(results);
+            });
+        } catch (e) {
+            console.error(e);
+            alert("Помилка завантаження питань.");
         }
-try{
-    const questionsData = await requestHandler.getQuestionCards();
-}catch (e){
-            alert("Failed to load questions")
-    console.log(e)
-}
+    };
 
-        const questionsHTML = questionCardService.generateQuestions(questionsData).join('');
-        renderQuiz(questionsHTML);
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-
-            const results = Array.from(formData.entries()).map(([key, value]) => ({
-                question_id: key.replace('question_', ''),
-                selected_option: value
-            }));
-
-            await requestHandler.sendAnswers(results);
-
-            showResult(results);
-        });
+    // Показуємо модалку при старті
+    window.addEventListener('DOMContentLoaded', () => {
+        loginModal.show();
     });
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            storageHandler.username = e.target.elements.usernameInput.value.trim();
+            const input = e.target.elements.usernameInput;
+            storageHandler.username = input ? input.value : null;
             loginModal.hide();
+            startQuiz(); // Запускаємо квіз після логіну
         });
     }
+
+    // Обробка кнопки Guest Mode (якщо у неї є ID або клас)
+    document.querySelector('.btn-danger[data-bs-dismiss="modal"]')?.addEventListener('click', () => {
+        storageHandler.username = ""; // Спрацює логіка з UUID
+        startQuiz();
+    });
 }

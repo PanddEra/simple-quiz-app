@@ -1,5 +1,6 @@
 <?php
-global $conn;
+require_once 'connect_db.php';
+
 $query = "SELECT * FROM answers";
 
 $result = mysqli_query($conn, $query);

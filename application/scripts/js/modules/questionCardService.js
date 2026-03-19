@@ -4,19 +4,24 @@ const questionCardService = {
 },
 
     _generateQuestionTemplate: (question) => {
-        return `<div class="card">
-            <div class="card-header">
-                ${question.text}
-            </div>
-            <div class="card-body">
+        const name = `question_${question.question_id}`;
+
+        return `<div class="card mb-3">
+        <div class="card-header">${question.question_text}</div>
+        <div class="card-body">
+            ${question.options.map(opt => `
                 <div class="form-check">
-                   ${question.options.map(q => `
-                        <input class="form-check-input" type="radio" name="radioDefault" id="radio_${q.id}"/>
-                        <label class="form-check-label" for="radio_${q.id}">${q.text}</label>
-                    `).join('')}
+                    <input class="form-check-input" type="radio" 
+                           name="${name}" 
+                           value="${opt.question_id}" 
+                           id="q${question.question_id}_${opt.question_id}" required>
+                    <label class="form-check-label" for="q${question.question_id}_${opt.question_id}">
+                        ${opt.question_text}
+                    </label>
                 </div>
-            </div>
-        </div>`
+            `).join('')}
+        </div>
+    </div>`;
     }
 }
 export default questionCardService;

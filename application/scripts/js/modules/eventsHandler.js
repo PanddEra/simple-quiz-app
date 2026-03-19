@@ -14,10 +14,36 @@ export default function initEvents({
         if (!storageHandler.username) {
             loginModal.show();
         }
+
         const questionsData = await requestHandler.getQuestionCards();
-        const questionsElements = await questionCardService.generateQuestions(questionsData).join('');
-        document.body.insertAdjacentHTML('beforeend', questionsElements);//NOT MINE
-    })
+        const questionsHTML = questionCardService.generateQuestions(questionsData).join('');
+//TODO move rendering to another file !
+        const quizFormHTML = ` 
+        <form id="quizForm">
+            ${questionsHTML}
+            <button type="submit" class="btn btn-success mt-4">Finish Quiz</button>
+        </form>
+    `;
+
+        document.body.insertAdjacentHTML('beforeend', quizFormHTML);
+
+        document.getElementById('quizForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const results = [];
+
+            for (let [key, value] of formData.entries()) {
+                const questionId = key.replace('question_', '');
+                results.push({
+                    question_id: questionId,
+                    selected_option: value
+                });
+            }
+
+            console.log("Saving these results:", results);
+        });
+    });
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {

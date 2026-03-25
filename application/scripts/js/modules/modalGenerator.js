@@ -1,6 +1,7 @@
 let instances = 1;
 
 const createModal = ({id, title, body, footer}) => {
+    console.log("Спроба створити модалку...");
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `<div class="modal fade" id=${id}_${instances}>
                             <div class="modal-dialog">
@@ -18,7 +19,8 @@ const createModal = ({id, title, body, footer}) => {
     const container = document.querySelector('#modal-container') || document.body;
     container.appendChild(wrapper);
     instances += 1;
-    return new bootstrap.Modal(wrapper);
+    const modalElement = wrapper.querySelector('.modal');
+    return new bootstrap.Modal(modalElement);
 }
 
 export default createModal;

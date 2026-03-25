@@ -1,6 +1,5 @@
-'use strict';
-import createModal from "./modules/modalGenerator";
-import initEvents from "./modules/eventsHandler";
+import createModal from "./modules/modalGenerator.js";
+import initEvents from "./modules/eventsHandler.js";
 
 const loginModal = createModal({
     id: 'loginModal',

@@ -1,4 +1,3 @@
-'use strict';
 import storageHandler from "./storageHandler.js";
 import questionCardService from "./questionCardService.js";
 import requestHandler from "./requestHandler.js";

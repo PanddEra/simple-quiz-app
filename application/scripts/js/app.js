@@ -1,6 +1,6 @@
 'use strict';
 import createModal from "./modules/modalGenerator.js";
-import initEvents from "./modules/eventsHandler.js";
+import init from "./modules/eventsHandler.js";
 
 const loginModal = createModal({
     id: 'loginModal',
@@ -13,8 +13,8 @@ const loginModal = createModal({
             </div>
         </form>`,
     footer: `
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Guest Mode</button>
+        <button type="button" class="btn btn-danger" data-guest-mode-btn>Guest Mode</button>
         <button form="loginForm" type="submit" class="btn btn-success">Login</button>`
 });
 
-initEvents({ loginModal });
+init({ loginModal });

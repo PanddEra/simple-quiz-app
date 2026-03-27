@@ -1,4 +1,8 @@
-export function renderQuiz(questionsHTML) {
+const renderQuiz = (questionsHTML) => {
+
+    /*deb*/
+    console.log("qHTML => " + questionsHTML);
+
     document.body.insertAdjacentHTML('beforeend', `
         <form id="quizForm">
             ${questionsHTML}
@@ -6,3 +10,4 @@ export function renderQuiz(questionsHTML) {
         </form>
     `);
 }
+export default renderQuiz;

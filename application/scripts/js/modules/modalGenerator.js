@@ -16,7 +16,7 @@ const createModal = ({ id, title, body, footer }) => {
             </div>
         </div>`;
 
-    (document.querySelector('#modal-container') || document.body).appendChild(wrapper);
+    document.body.appendChild(wrapper);
     return new bootstrap.Modal(wrapper.firstElementChild);
 };
 

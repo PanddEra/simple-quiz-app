@@ -1,8 +1,12 @@
 const keys = ['option_a', 'option_b', 'option_c', 'option_d'];
 
-const questionCardService = {
-    generateQuestions: (questions) => questions.map(q => {
-        const { question_id: id, question_text: text, options } = q;
+const generateQuestions = (questions) =>
+{
+    /*deb*/
+    console.log('generateQuestions => ' + questions);
+
+    return questions.map(question => {
+        const { question_id: id, question_text: text, options } = question;
         return `
             <div class="card mb-3">
                 <div class="card-header"><b>${text}</b></div>
@@ -16,7 +20,7 @@ const questionCardService = {
                     `).join('')}
                 </div>
             </div>`;
-    }).join('')
-};
+    }).join(' ')
+}
 
-export default questionCardService;
+export default generateQuestions;

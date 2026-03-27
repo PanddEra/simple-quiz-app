@@ -1,7 +1,5 @@
 # Simple Quiz App
 
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/PanddEra/simple-quiz-app.git)
-
 This repository contains a straightforward, full-stack quiz application. The frontend is built with vanilla JavaScript (ES6 Modules) and Bootstrap, while the backend is powered by PHP and a MySQL database.
 
 ## Features

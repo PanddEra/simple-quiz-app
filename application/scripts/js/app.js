@@ -9,7 +9,6 @@ const loginModal = createModal({
         <form id="loginForm">
             <div class="mb-3">
                 <input type="text" class="form-control" id="usernameInput" placeholder="username">
-                <label for="usernameInput">Username</label>
             </div>
         </form>`,
     footer: `

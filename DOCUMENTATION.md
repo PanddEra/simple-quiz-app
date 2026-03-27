@@ -209,26 +209,7 @@ Server-Side (PHP Scripts):
 **Description**: A depiction of the tables in the database and how they interact with each other.
 
 **Schema**:
-```plaintext
-+-------------------+       +----------------+
-|  questions        |       |  answers       |
-+-------------------+       +----------------+
-| question_id (PK)  |<----->| question_id (FK)|
-| question_text     |       | option_a        |
-| correct_option    |       | option_b        |
-+-------------------+       | option_c        |
-                            | option_d        |
-                            +----------------+
-
-+-------------------+
-|  user_responses   |
-+-------------------+
-| response_id (PK)  |
-| username          |
-| question_id (FK)  |
-| selected_option   |
-+-------------------+
-```
+<img width="867" height="565" alt="image" src="https://github.com/user-attachments/assets/b239e915-83f4-4ce5-8520-baf0b395dad7" />
 
 **Relationships**:
 - **questions.question_id**: Primary key for the `questions` table.

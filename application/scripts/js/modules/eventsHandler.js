@@ -33,7 +33,6 @@ const startQuiz = async () => {
             showResult({score, total});
         });
     } catch (e) {
-        console.error(e);
         alert("Error loading questions.");
     }
 };

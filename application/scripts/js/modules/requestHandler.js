@@ -1,13 +1,13 @@
 const requestHandler = {
 
     async _fetchGetQuestions(){
-        const response = await fetch(`scripts/php/getQuestions.php`);
+        const response = await fetch(`scripts/php/get_questions.php`);
         const text = await response.text();
         return JSON.parse(text);
     },
 
     async _fetchGetAnswers(){
-        const response = await fetch(`scripts/php/getAnswers.php`);
+        const response = await fetch(`scripts/php/get_answers.php`);
         const text = await response.text();
         return JSON.parse(text);
     },
@@ -15,14 +15,20 @@ const requestHandler = {
     async _fetchPostQuestions(data){
         await fetch(`scripts/php/post_user_response.php`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(data)
         });
-
     },
 
     async _fetchGetUserScore(username){
         const response = await fetch(`scripts/php/get_score.php`, {
-            body: JSON.stringify(username)
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
         });
         const text = await response.text();
         return JSON.parse(text);
@@ -33,8 +39,8 @@ const requestHandler = {
         const answers = await this._fetchGetAnswers();
 
         /*deb*/
-        console.log("q => " + questions);
-        console.log("a => " + answers);
+        console.log(questions);
+        console.log(answers);
 
         return questions.map(q => ({
             ...q,
@@ -45,14 +51,13 @@ const requestHandler = {
     async sendAnswers(data) {
 
         /*deb*/
-        console.log("d => " + data);
+        console.log(data);
 
         await this._fetchPostQuestions(data);
     },
 
     async getUserScore(username){
-        const response = await this._fetchGetUserScore(username);
-        return await response;
+        return await this._fetchGetUserScore(username);
     }
 };
 

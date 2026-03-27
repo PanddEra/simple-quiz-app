@@ -1,7 +1,7 @@
 const renderQuiz = (questionsHTML) => {
 
     /*deb*/
-    console.log("qHTML => " + questionsHTML);
+    console.log(questionsHTML);
 
     document.body.insertAdjacentHTML('beforeend', `
         <form id="quizForm">

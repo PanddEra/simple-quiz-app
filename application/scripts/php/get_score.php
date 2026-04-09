@@ -12,7 +12,6 @@ if (!$requestData) {
 
 $username = $requestData['username'] ?? 'Guest';
 
-// Отримуємо всі відповіді користувача + правильні варіанти
 $stmt = $conn->prepare("
     SELECT ur.question_id, ur.selected_option, q.correct_option
     FROM user_responses ur

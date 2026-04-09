@@ -2,9 +2,6 @@ const keys = ['option_a', 'option_b', 'option_c', 'option_d'];
 
 const generateQuestions = (questions) =>
 {
-    /*deb*/
-    console.log( questions);
-    
     return questions.map(question => {
         const { question_id: id, question_text: text, options } = question;
         return `

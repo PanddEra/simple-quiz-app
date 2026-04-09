@@ -8,9 +8,7 @@ import showResult from "./scoreModal.js";
 const startQuiz = async () => {
     try {
         const questionsData = await requestHandler.getQuestionCards();
-        const questionsHTML = generateQuestionsHTML(questionsData);
-        
-        renderQuiz(questionsHTML);
+        renderQuiz(questionsData);
 
         document.getElementById('quizForm').addEventListener("submit", async (e) => {
             e.preventDefault();

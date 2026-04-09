@@ -38,10 +38,6 @@ const requestHandler = {
         const questions = await this._fetchGetQuestions();
         const answers = await this._fetchGetAnswers();
 
-        /*deb*/
-        console.log(questions);
-        console.log(answers);
-
         return questions.map(q => ({
             ...q,
             options: answers.find(a => a.question_id === q.question_id)
@@ -49,9 +45,6 @@ const requestHandler = {
     },
 
     async sendAnswers(data) {
-
-        /*deb*/
-        console.log(data);
 
         await this._fetchPostQuestions(data);
     },

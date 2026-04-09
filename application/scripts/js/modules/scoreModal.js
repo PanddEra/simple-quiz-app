@@ -2,9 +2,6 @@ import createModal from "./modalGenerator.js";
 
 const showResult = ({ score, total }) => {
 
-    /*deb*/
-    console.log("showResult s/t => ", score, total);
-
     const resultModal = createModal({
         id: 'resultModal',
         title: 'Quiz Finished!',
